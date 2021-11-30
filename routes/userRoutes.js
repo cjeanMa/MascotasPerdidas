@@ -4,7 +4,8 @@ const { getAllUsers,
         createUser,
         updateUser,
         deleteUser,
-        registerUser} =  
+        registerUser,
+        sendEmailConfirmation} =  
         require("../controllers/userController")
 const { check } = require("express-validator");
 const { checkValidations } = require("../middlewares/checkValidation");

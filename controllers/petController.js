@@ -23,9 +23,14 @@ const getPet = async (req, res) => {
     })
 }
 const createPet = async (req, res) => {
-    const { name, email } = req.body;
+    const { name, description, contact, type } = req.body;
+    const idUser = req.userAuth._id;
 
-    const pet = new Pet({ name, email})
+    const pet = new Pet({ name,
+                         description,
+                         contact,
+                         type, 
+                         user: idUser})
 
     await pet.save();
 

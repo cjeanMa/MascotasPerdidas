@@ -1,6 +1,9 @@
 const express = require("express");
+const fileUpload = require('express-fileupload');
 const morgan = require("morgan");
+const cors = require('cors')
 const { mongoConnection } = require("../database/db");
+const {uploadImages} = require("../controllers/uploadImages")
 
 class Server{
 
@@ -13,8 +16,11 @@ class Server{
     }
 
     middlewares(){  
+        this.app.use(cors())
         this.app.use(express.json());
+        this.app.use(express.urlencoded({ extended: true}));
         this.app.use(morgan('tiny'));
+        this.app.use(fileUpload());
     }
 
     routes(){
@@ -22,6 +28,10 @@ class Server{
         this.app.use("/api/auth", require("../routes/authRoutes"));
         this.app.use("/api/pets", require("../routes/petRoutes"));
         this.app.use("/api/types", require("../routes/typeRoutes"));
+        
+        this.app.post("/api/dactilar", uploadImages);
+
+        
     }
 
     async dbCon(){

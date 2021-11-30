@@ -28,7 +28,12 @@ const PetSchema = Schema({
     user:{
         type: Schema.Types.ObjectId,
         ref:"user",
-        required:[true, "El id de usuario es neceasrio"]
+        required:[true, "El id de usuario es necesario"]
+    },
+    type:{
+        type: Schema.Types.ObjectId,
+        ref:"type",
+        required:[true, "El id de tipo es necesario"]
     },
     createdAt: {
         type: Date,
@@ -40,5 +45,6 @@ const PetSchema = Schema({
     }
 
 })
+
 
 module.exports = model("pet", PetSchema);

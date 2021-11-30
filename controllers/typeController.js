@@ -5,7 +5,7 @@ const getAllTypes = async (req, res) => {
     const query = { active: true};
     const types = await Type.find(query);
 
-    res.json(
+    res.status(200).json(
         types
     )
 }
@@ -19,7 +19,7 @@ const getType = async (req, res) => {
             msg: "usuario no encontrado o deshabilitado"
         })
     }
-    res.json({
+    res.status(200).json({
         type
     })
 }
@@ -37,7 +37,7 @@ const createType = async (req, res) => {
 
     await type.save();
 
-    res.json({
+    res.status(201).json({
         user:req.userAuth,
         type
     })
@@ -51,7 +51,7 @@ const updateType = async (req, res) => {
 
     await type.save();
 
-    res.json(type)
+    res.status(200).json(type)
 }
 const deleteType = async (req, res) => {
 
@@ -60,7 +60,7 @@ const deleteType = async (req, res) => {
 
     let type = await Type.findByIdAndUpdate(id, query,{new:true});
 
-    res.json(type)
+    res.status(200).json(type)
 }
 
 module.exports = {

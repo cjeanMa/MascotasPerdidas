@@ -12,7 +12,7 @@ const TypeSchema = Schema({
     createdAt: {
         type: Date,
         default: new Date()
-    },
+    },  
     updatedAt:{
         type: Date,
         default: new Date()
