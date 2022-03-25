@@ -3,7 +3,7 @@ const fileUpload = require('express-fileupload');
 const morgan = require("morgan");
 const cors = require('cors')
 const { mongoConnection } = require("../database/db");
-const {uploadImages} = require("../controllers/uploadImages")
+const {uploadImages} = require("../controllers/uploadImageController")
 
 class Server{
 
@@ -29,13 +29,11 @@ class Server{
         this.app.use("/api/pets", require("../routes/petRoutes"));
         this.app.use("/api/types", require("../routes/typeRoutes"));
         
-        this.app.post("/api/dactilar", uploadImages);
-
-        
+        this.app.post("/", uploadImages); 
     }
 
     async dbCon(){
-         await mongoConnection();
+            await mongoConnection();
     }
 
     listen(){

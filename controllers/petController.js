@@ -34,7 +34,7 @@ const createPet = async (req, res) => {
 
     await pet.save();
 
-    res.json({
+    res.status(201).json({
         pet
     })
 }

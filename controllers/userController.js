@@ -5,23 +5,10 @@ const { generateRandomString } = require("../helpers/general-helpers");
 
 const getAllUsers = async (req, res) => {
     const query = { active: true };
-    const users = await User.find(query);
-
-    const code = generateRandomString(6);
-    const {phone} = req.query;
-    if(!phone){
-        res.status(400).json({
-            msg: "es necesario el campo phone"
-        })
-    }
-    
     try {
-        const data = await sendSMS(code, phone);
-        //console.log("Success.", data);
-//        return data; // For unit tests.
+        const users = await User.find(query);
         res.json(
-            //users
-            code
+            users
         )
 
     } catch (err) {
@@ -100,6 +87,21 @@ const deleteUser = async (req, res) => {
 
     res.json(user)
 }
+
+const confirmationUser = async (req, res) => {
+    const code = generateRandomString(6);
+    const { phone } = req.query;
+    if (!phone) {
+        res.status(400).json({
+            msg: "es necesario el campo phone"
+        })
+    }
+    const data = await sendSMS(code, phone);
+    res.json(
+        code
+    )
+}
+
 
 module.exports = {
     getAllUsers,
